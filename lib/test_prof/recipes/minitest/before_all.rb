@@ -56,8 +56,8 @@ module TestProf
       module ClassMethods
         attr_accessor :before_all_executor
 
-        def before_all
-          self.before_all_executor = Executor.new(&Proc.new)
+        def before_all(&block)
+          self.before_all_executor = Executor.new(&block)
 
           prepend(Module.new do
             def setup
