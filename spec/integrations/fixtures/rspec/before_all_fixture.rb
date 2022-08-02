@@ -7,16 +7,6 @@ require "test_prof/recipes/rspec/before_all"
 # for threading tests
 require "test_prof/recipes/active_record_one_love" if ::ActiveRecord::VERSION::MAJOR < 5 || defined?(JRUBY_VERSION)
 
-shared_context "with user" do
-  before_all do
-    @context_user = TestProf::FactoryBot.create(:user, name: "Lolo")
-  end
-end
-
-RSpec.configure do |config|
-  config.include_context "with user", with_user: true
-end
-
 describe "User", :transactional do
   context "with before_all" do
     before_all do
@@ -79,13 +69,5 @@ describe "User", :transactional do
     specify { expect(User.find_by(tag: :thread)).to be_a(User) }
 
     specify { expect(User.count).to eq 1 }
-  end
-end
-
-describe "User", :transactional, :with_user do
-  context "with shared context" do
-    it "works", :with_user do
-      expect(User.where(name: "Lolo").count).to eq 1
-    end
   end
 end

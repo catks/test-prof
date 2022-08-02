@@ -146,4 +146,6 @@ if defined?(::ActiveRecord)
   end
 end
 
-RSpec::Core::ExampleGroup.extend TestProf::LetItBe
+RSpec.configure do |config|
+  config.extend TestProf::LetItBe
+end

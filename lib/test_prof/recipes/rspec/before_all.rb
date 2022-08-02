@@ -39,4 +39,6 @@ module TestProf
   end
 end
 
-RSpec::Core::ExampleGroup.extend TestProf::BeforeAll::RSpec
+RSpec.configure do |config|
+  config.extend TestProf::BeforeAll::RSpec
+end
